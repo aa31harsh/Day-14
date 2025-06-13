@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>FlickFinder</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+      background-color: #0f1115;
+      color: white;
+      overflow-x: hidden;
+    }
+
+    nav {
+      background-color: #1e2a38;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 40px;
+    }
+
+    nav .logo {
+      font-size: 24px;
+      font-weight: bold;
+      color: #00ffcc;
+    }
+
+    nav .nav-links a {
+      color: white;
+      margin: 0 15px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    nav .nav-links a:hover {
+      color: #00ffcc;
+    }
+
+    .favorite-btn {
+      background-color: transparent;
+      border: 2px solid #00ffcc;
+      border-radius: 20px;
+      padding: 8px 18px;
+      color: #00ffcc;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .hero {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 20px;
+      position: relative;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0;
+      height: 100%;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: 1;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 800px;
+      padding: 20px;
+    }
+
+    .hero h1 {
+      font-size: 3em;
+      margin-bottom: 15px;
+    }
+
+    .hero p {
+      font-size: 1.2em;
+      margin-bottom: 30px;
+    }
+
+    .discover-btn {
+      padding: 12px 24px;
+      font-size: 1em;
+      border: none;
+      background-color: #00ffcc;
+      color: black;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .discover-btn:hover {
+      background-color: #00ccaa;
+    }
+
+    .arrow-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: #00ffcc;
+      color: black;
+      padding: 10px;
+      border-radius: 50%;
+      border: none;
+      cursor: pointer;
+      font-size: 24px;
+      z-index: 3;
+    }
+
+    .arrow-left {
+      left: 20px;
+    }
+
+    .arrow-right {
+      right: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="logo">Flick<span style="color: white;">Finder</span></div>
+    <div class="nav-links">
+      <a href="#">Home</a>
+      <a href="#">Tv Show</a>
+      <a href="#">Movie</a>
+      <a href="#">Upcoming</a>
+    </div>
+    <button class="favorite-btn">Favorite ❤️</button>
+  </nav>
+
+  <section class="hero" id="hero">
+    <button class="arrow-btn arrow-left" onclick="prevSlide()">&#8249;</button>
+
+    <div class="hero-content">
+      <h1 id="slide-title">Bringing the Big Screen to Your Screen</h1>
+      <p id="slide-desc">Discover, critique, and celebrate movies with honest reviews and fresh takes on every film.</p>
+      <button class="discover-btn">Discover More...</button>
+    </div>
+
+    <button class="arrow-btn arrow-right" onclick="nextSlide()">&#8250;</button>
+  </section>
+
+  <script>
+    const slides = [
+      {
+        image: "d2hd73xxwvaa1.jpg",
+        title: "Bringing the Big Screen to Your Screen",
+        desc: "Discover, critique, and celebrate movies with honest reviews and fresh takes on every film."
+      },
+      {
+        image: "road-fields-sky-decline-wallpaper-preview.jpg",
+        title: "Explore Popular TV Shows",
+        desc: "Catch up on trending series, reviews, and fan discussions all in one place."
+      },
+      {
+        image: "wallpaper2.jpg",
+        title: "Upcoming Blockbusters",
+        desc: "Get previews and insights into the most anticipated upcoming films."
+      }
+    ];
+
+    let currentSlide = 0;
+
+    const heroSection = document.getElementById('hero');
+    const title = document.getElementById('slide-title');
+    const desc = document.getElementById('slide-desc');
+
+    function renderSlide() {
+      heroSection.style.backgroundImage = `url('${slides[currentSlide].image}')`;
+      title.innerText = slides[currentSlide].title;
+      desc.innerText = slides[currentSlide].desc;
+    }
+
+    function nextSlide() {
+      currentSlide = (currentSlide + 1) % slides.length;
+      renderSlide();
+    }
+
+    function prevSlide() {
+      currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+      renderSlide();
+    }
+
+    // Initial render
+    renderSlide();
+  </script>
+
+</body>
+</html>
+v
